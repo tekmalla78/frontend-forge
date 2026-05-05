@@ -1,15 +1,43 @@
 import logoFooterUrl from "@/assets/logo-footer.png";
 
-const companyLinks = ["About Us", "Services", "Downloads", "Fees & Comission", "FAQs", "Careers"];
-const quickLinks   = ["TMS Login", "Client Login", "Meroshare Login", "IPO Check", "Open Online Account"];
-const usefulLinks  = ["Securities Board of Nepal", "Nepal Stock Exchange", "CDS and Clearing", "UN Consolidated Sanction List", "MOHA Sanction List"];
-const legalLinks   = ["Privacy Policy", "Terms of Service", "Disclaimer", "SEBON Guidelines", "Grievance"];
+const companyLinks = [
+  { label: "About Us",         href: "/about" },
+  { label: "Services",         href: "/services" },
+  { label: "Downloads",        href: "/downloads" },
+  { label: "Fees & Comission", href: "/fees-and-commission" },
+  { label: "FAQs",             href: "/faqs" },
+  { label: "Careers",          href: "/careers" },
+];
+
+const quickLinks = [
+  { label: "TMS Login",           href: "https://tms45.nepsetms.com.np" },
+  { label: "Client Login",        href: "/client-login" },
+  { label: "Meroshare Login",     href: "https://meroshare.cdsc.com.np" },
+  { label: "IPO Check",           href: "https://iporesult.cdsc.com.np" },
+  { label: "Open Online Account", href: "/open-account" },
+];
+
+const usefulLinks = [
+  { label: "Securities Board of Nepal",  href: "https://www.sebon.gov.np" },
+  { label: "Nepal Stock Exchange",       href: "https://www.nepalstock.com.np" },
+  { label: "CDS and Clearing",           href: "https://www.cdsc.com.np" },
+  { label: "UN Consolidated Sanction List", href: "https://www.un.org/securitycouncil/content/un-sc-consolidated-list" },
+  { label: "MOHA Sanction List",         href: "https://moha.gov.np" },
+];
+
+const legalLinks = [
+  { label: "Privacy Policy",    href: "/privacy-policy" },
+  { label: "Terms of Service",  href: "/terms-of-service" },
+  { label: "Disclaimer",        href: "/disclaimer" },
+  { label: "SEBON Guidelines",  href: "/sebon-guidelines" },
+  { label: "Grievance",         href: "/grievance" },
+];
 
 const socials = [
-  { label: "Twitter / X", symbol: "𝕏" },
-  { label: "Facebook",    symbol: "f" },
-  { label: "LinkedIn",    symbol: "in" },
-  { label: "Email",       symbol: "✉" },
+  { label: "Twitter / X", symbol: "𝕏",  href: "https://twitter.com/imperial_securities" },
+  { label: "Facebook",    symbol: "f",   href: "https://facebook.com/imperial.securities" },
+  { label: "LinkedIn",    symbol: "in",  href: "https://linkedin.com/company/imperial-securities" },
+  { label: "Email",       symbol: "✉",  href: "mailto:45.imperial@gmail.com" },
 ];
 
 export default function SiteFooter() {
@@ -256,7 +284,9 @@ export default function SiteFooter() {
 
             {/* Logo + tagline */}
             <div className="ft-logo">
-              <img src={logoFooterUrl} alt="Imperial Securities" decoding="async" loading="lazy" />
+              <a href="/">
+                <img src={logoFooterUrl} alt="Imperial Securities" decoding="async" loading="lazy" />
+              </a>
               <p className="ft-tagline">
                 Nepal's trusted stock broker since 1997. SEBON registered, NEPSE member broker No. 45.
               </p>
@@ -269,7 +299,13 @@ export default function SiteFooter() {
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
                   <path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4zm0 5.5A1.5 1.5 0 1 1 7 3a1.5 1.5 0 0 1 0 3z"/>
                 </svg>
-                <span>Anamnagar 29, Hanumansthan, Kathmandu</span>
+                <a
+                  href="https://maps.google.com/?q=Anamnagar+29,+Hanumansthan,+Kathmandu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Anamnagar 29, Hanumansthan, Kathmandu
+                </a>
               </div>
               <div className="ft-contact-row">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
@@ -289,7 +325,14 @@ export default function SiteFooter() {
             {/* Socials */}
             <div className="ft-socials">
               {socials.map((s) => (
-                <a key={s.label} href="#" aria-label={s.label} className="ft-social-btn">
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  className="ft-social-btn"
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                >
                   {s.symbol}
                 </a>
               ))}
@@ -305,7 +348,7 @@ export default function SiteFooter() {
               <div className="ft-col-heading">Company Overview</div>
               <ul className="ft-link-list ft-company-links">
                 {companyLinks.map((l) => (
-                  <li key={l}><a href="#">{l}</a></li>
+                  <li key={l.label}><a href={l.href}>{l.label}</a></li>
                 ))}
               </ul>
             </div>
@@ -315,7 +358,15 @@ export default function SiteFooter() {
               <div className="ft-col-heading">Quick Links</div>
               <ul className="ft-link-list">
                 {quickLinks.map((l) => (
-                  <li key={l}><a href="#">{l}</a></li>
+                  <li key={l.label}>
+                    <a
+                      href={l.href}
+                      target={l.href.startsWith("http") ? "_blank" : undefined}
+                      rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    >
+                      {l.label}
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -325,12 +376,20 @@ export default function SiteFooter() {
               <div className="ft-col-heading">Useful Links</div>
               <ul className="ft-link-list">
                 {usefulLinks.map((l) => (
-                  <li key={l}><a href="#">{l}</a></li>
+                  <li key={l.label}>
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>
 
-            {/* Empty 4th col placeholder on desktop (legal is its own row) */}
+            {/* Empty 4th col placeholder on desktop */}
             <div />
 
           </div>
@@ -341,7 +400,16 @@ export default function SiteFooter() {
               <div className="ft-col-heading">Quick Links</div>
               <ul className="ft-link-list">
                 {quickLinks.map((l) => (
-                  <li key={l}><a href="#" style={{ fontSize: 12 }}>{l}</a></li>
+                  <li key={l.label}>
+                    <a
+                      href={l.href}
+                      style={{ fontSize: 12 }}
+                      target={l.href.startsWith("http") ? "_blank" : undefined}
+                      rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    >
+                      {l.label}
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -349,7 +417,16 @@ export default function SiteFooter() {
               <div className="ft-col-heading">Useful Links</div>
               <ul className="ft-link-list">
                 {usefulLinks.map((l) => (
-                  <li key={l}><a href="#" style={{ fontSize: 12 }}>{l}</a></li>
+                  <li key={l.label}>
+                    <a
+                      href={l.href}
+                      style={{ fontSize: 12 }}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -359,7 +436,7 @@ export default function SiteFooter() {
           <div className="ft-legal">
             {legalLinks.map((l, i) => (
               <>
-                <a key={l} href="#">{l}</a>
+                <a key={l.label} href={l.href}>{l.label}</a>
                 {i < legalLinks.length - 1 && <span className="ft-legal-dot" />}
               </>
             ))}

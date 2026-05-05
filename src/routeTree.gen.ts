@@ -14,6 +14,7 @@ import { Route as OurTeamRouteImport } from './routes/our-team'
 import { Route as NewsEventsRouteImport } from './routes/news-events'
 import { Route as MarketRouteImport } from './routes/market'
 import { Route as ManagementTeamRouteImport } from './routes/management-team'
+import { Route as GrievanceRouteImport } from './routes/grievance'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ChairmanMessageRouteImport } from './routes/chairman-message'
@@ -56,6 +57,11 @@ const MarketRoute = MarketRouteImport.update({
 const ManagementTeamRoute = ManagementTeamRouteImport.update({
   id: '/management-team',
   path: '/management-team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GrievanceRoute = GrievanceRouteImport.update({
+  id: '/grievance',
+  path: '/grievance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqsRoute = FaqsRouteImport.update({
@@ -159,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/chairman-message': typeof ChairmanMessageRoute
   '/contact': typeof ContactRoute
   '/faqs': typeof FaqsRoute
+  '/grievance': typeof GrievanceRoute
   '/management-team': typeof ManagementTeamRoute
   '/market': typeof MarketRouteWithChildren
   '/news-events': typeof NewsEventsRoute
@@ -184,6 +191,7 @@ export interface FileRoutesByTo {
   '/chairman-message': typeof ChairmanMessageRoute
   '/contact': typeof ContactRoute
   '/faqs': typeof FaqsRoute
+  '/grievance': typeof GrievanceRoute
   '/management-team': typeof ManagementTeamRoute
   '/market': typeof MarketRouteWithChildren
   '/news-events': typeof NewsEventsRoute
@@ -210,6 +218,7 @@ export interface FileRoutesById {
   '/chairman-message': typeof ChairmanMessageRoute
   '/contact': typeof ContactRoute
   '/faqs': typeof FaqsRoute
+  '/grievance': typeof GrievanceRoute
   '/management-team': typeof ManagementTeamRoute
   '/market': typeof MarketRouteWithChildren
   '/news-events': typeof NewsEventsRoute
@@ -237,6 +246,7 @@ export interface FileRouteTypes {
     | '/chairman-message'
     | '/contact'
     | '/faqs'
+    | '/grievance'
     | '/management-team'
     | '/market'
     | '/news-events'
@@ -262,6 +272,7 @@ export interface FileRouteTypes {
     | '/chairman-message'
     | '/contact'
     | '/faqs'
+    | '/grievance'
     | '/management-team'
     | '/market'
     | '/news-events'
@@ -287,6 +298,7 @@ export interface FileRouteTypes {
     | '/chairman-message'
     | '/contact'
     | '/faqs'
+    | '/grievance'
     | '/management-team'
     | '/market'
     | '/news-events'
@@ -313,6 +325,7 @@ export interface RootRouteChildren {
   ChairmanMessageRoute: typeof ChairmanMessageRoute
   ContactRoute: typeof ContactRoute
   FaqsRoute: typeof FaqsRoute
+  GrievanceRoute: typeof GrievanceRoute
   ManagementTeamRoute: typeof ManagementTeamRoute
   MarketRoute: typeof MarketRouteWithChildren
   NewsEventsRoute: typeof NewsEventsRoute
@@ -362,6 +375,13 @@ declare module '@tanstack/react-router' {
       path: '/management-team'
       fullPath: '/management-team'
       preLoaderRoute: typeof ManagementTeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/grievance': {
+      id: '/grievance'
+      path: '/grievance'
+      fullPath: '/grievance'
+      preLoaderRoute: typeof GrievanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faqs': {
@@ -519,6 +539,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChairmanMessageRoute: ChairmanMessageRoute,
   ContactRoute: ContactRoute,
   FaqsRoute: FaqsRoute,
+  GrievanceRoute: GrievanceRoute,
   ManagementTeamRoute: ManagementTeamRoute,
   MarketRoute: MarketRouteWithChildren,
   NewsEventsRoute: NewsEventsRoute,
